@@ -1,10 +1,8 @@
 <h1 align="center"></br>6-Ten Rewards Record System </br>
 	<img src="https://img.shields.io/badge/status-development-yellow.svg" />
-	<img src="https://img.shields.io/badge/node-v8.4.0-green.svg" />
-	<img src="https://img.shields.io/badge/express-v4.15.5-green.svg" />
 </h1>
 </br>
-<h4 align="center">CMSC 127 Project : A record system allows us to record, in electronic form, any transaction done by a customer with 6-Ten Rewards card.
+<h4 align="center">CMSC 127 Project </br> A record system allows us to record, in electronic form, any transaction done by a customer with 6-Ten Rewards card.
 </h4>
 
 # Installation
