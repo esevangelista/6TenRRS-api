@@ -1,9 +1,12 @@
 'use strict';
 import { Router } from 'express';
-import db from './database/index'
+import customerRouter from './entities/customer/router';
 //import session from 'express-session';
+
+
 const router = Router();
 
+router.use(customerRouter);
 
 
 router.get('/', function(req, res) {
