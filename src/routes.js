@@ -4,6 +4,7 @@ import customerRouter from './entities/customer/router';
 import rewardRouter from './entities/reward/router';
 import branchRouter from './entities/branch/router';
 import productRouter from './entities/product/router';
+import stockRouter from './entities/stock/router';
 //import session from 'express-session';
 
 
@@ -13,6 +14,7 @@ router.use(customerRouter);
 router.use(rewardRouter);
 router.use(branchRouter);
 router.use(productRouter);
+router.use(stockRouter);
 
 
 router.get('/', function(req, res) {
