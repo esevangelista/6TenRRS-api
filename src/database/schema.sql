@@ -67,7 +67,7 @@ CREATE TABLE PROMO (
 CREATE TABLE PROMOSTAR (
 	PromoStarID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	Starsval INT NOT NULL,
-	DateUsed datetime NOT NULL,
+	DateUsed datetime DEFAULT NULL,
 	DateEarned datetime NOT NULL,
 	ExprDate Date NOT NULL,
 	CustomerId INT NOT NULL,
