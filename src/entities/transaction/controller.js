@@ -87,10 +87,11 @@ export const deleteTransaction = ({ id }) => {
   });
 };
 
-export const addTransaction = ({ Bid },{ Payment_amt, Payment_type, TransDesc, DateCreated, DateUpdated, CustomerId}) => {
+export const addTransaction = ({ Bid },{ Payment_amt, Payment_type, TransDesc, CustomerId}) => {
   return new Promise((resolve, reject) => {
     const query = `INSERT INTO TRANSACTION VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?)`;
-    const values = [ Payment_amt, Payment_type, TransDesc, DateCreated, DateUpdated, CustomerId, Bid];
+
+    const values = [ Payment_amt, Payment_type, TransDesc, new Date(), new Date(), CustomerId, Bid];
     db.query(query, values, (err, results) => {
       if (err) {
         console.log(err);

@@ -6,12 +6,13 @@
 </h4>
 
 # Installation
-1. Install [NodeJS](https://nodejs.org/en/download/) and MariaDB
-3. Install dependencies with `npm install`.
-4. Load database schema `npm run seed`.
+1. Install [NodeJS](https://nodejs.org/en/download/) and MariaDB.
+2. Install latest version of [Yarn](https://yarnpkg.com/en/docs/install#alternatives-tab) or with `npm install yarn -g`.
+3. Install dependencies with `yarn install`.
+4. Load database schema `yarn run seed`.
 
 ## Start
-1. Start the server with `npm start`.
+1. Start the server with `yarn start`.
 2. Access the api through `http://localhost:3001/api/<route>`.
 
 ## Developers
