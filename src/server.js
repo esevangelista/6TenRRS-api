@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(logger('dev'));
 
 
-//app.use('/api', routes);
+app.use('/api', routes);
 
 //start the server
 const server = app.listen(port, (err) => {
