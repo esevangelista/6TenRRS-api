@@ -2,7 +2,7 @@
 	<img src="https://img.shields.io/badge/status-development-yellow.svg" />
 </h1>
 </br>
-<h4 align="center">CMSC 127 Project </br> A system that records any transaction done by a customer with 6-Ten Rewards card.
+<h4 align="center">CMSC 127 Project </br> A system that records any transaction done by a customer with 6-Ten Rewards card
 </h4>
 
 # Installation
