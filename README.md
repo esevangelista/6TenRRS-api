@@ -15,6 +15,109 @@
 1. Start the server with `yarn start`.
 2. Access the api through `http://localhost:3001/api/<route>`.
 
+
+
+## Tables 
+
+### `USER`
+
+| Field    | Type         | Null | Key | Default | Extra          |
+|----------|--------------|------|-----|---------|----------------|
+| id       | int(11)      | NO   | PRI | NULL    | auto_increment |
+| username | varchar(255) | NO   |     | NULL    |                |
+| password | varchar(255) | NO   |     | NULL    |                |
+
+
+### `CUSTOMER`
+
+| Field      | Type         | Null | Key | Default | Extra          |
+|------------|--------------|------|-----|---------|----------------|
+| CustomerID | int(11)      | NO   | PRI | NULL    | auto_increment |
+| Name       | varchar(255) | NO   |     | NULL    |                |
+| Address    | varchar(255) | NO   |     | NULL    |                |
+| ContactNum | varchar(11)  | NO   |     | NULL    |                |
+| Birthday   | date         | NO   |     | NULL    |                |
+| Age        | int(11)      | NO   |     | NULL    |                |
+
+
+### `BRANCH`
+
+| Field          | Type         | Null | Key | Default | Extra          |
+|----------------|--------------|------|-----|---------|----------------|
+| BranchID       | int(11)      | NO   | PRI | NULL    | auto_increment |
+| BranchLocation | varchar(255) | NO   |     | NULL    |                |
+| BranchManager  | varchar(255) | NO   |     | NULL    |                |
+
+
+### `PRODUCT`
+
+| Field      | Type         | Null | Key | Default | Extra          |
+|------------|--------------|------|-----|---------|----------------|
+| ProdID     | int(11)      | NO   | PRI | NULL    | auto_increment |
+| ProdName   | varchar(255) | NO   |     | NULL    |                |
+| ProdPoints | int(11)      | NO   |     | NULL    |                |
+| Price      | int(11)      | NO   |     | NULL    |                |
+
+
+### `PROMO`
+
+| Field         | Type    | Null | Key | Default | Extra          |
+|---------------|---------|------|-----|---------|----------------|
+| PromoID       | int(11) | NO   | PRI | NULL    | auto_increment |
+| StarsEarnable | int(11) | NO   |     | NULL    |                |
+| StarsNeeded   | int(11) | NO   |     | NULL    |                |
+| ExprDate      | date    | NO   |     | NULL    |                |
+| ProductID     | int(11) | NO   | MUL | NULL    |                |
+
+
+### `PROMOSTAR`
+
+| Field       | Type     | Null | Key | Default | Extra          |
+|-------------|----------|------|-----|---------|----------------|
+| PromoStarID | int(11)  | NO   | PRI | NULL    | auto_increment |
+| Starsval    | int(11)  | NO   |     | NULL    |                |
+| DateUsed    | datetime | YES  |     | NULL    |                |
+| DateEarned  | datetime | NO   |     | NULL    |                |
+| ExprDate    | date     | NO   |     | NULL    |                |
+| CustomerId  | int(11)  | NO   | MUL | NULL    |                |
+| PromoId     | int(11)  | NO   | MUL | NULL    |                |
+
+
+### `REWARD`
+
+| Field      | Type     | Null | Key | Default | Extra          |
+|------------|----------|------|-----|---------|----------------|
+| RewardID   | int(11)  | NO   | PRI | NULL    | auto_increment |
+| Points     | int(11)  | NO   |     | NULL    |                |
+| DateUsed   | datetime | YES  |     | NULL    |                |
+| DateEarned | datetime | NO   |     | NULL    |                |
+| CustomerId | int(11)  | NO   | MUL | NULL    |                |
+
+
+### `STOCK`
+
+| Field      | Type    | Null | Key | Default | Extra          |
+|------------|---------|------|-----|---------|----------------|
+| StockID    | int(11) | NO   | PRI | NULL    | auto_increment |
+| Product_id | int(11) | NO   | MUL | NULL    |                |
+| Branch_id  | int(11) | NO   | MUL | NULL    |                |
+| Quantity   | int(11) | NO   |     | NULL    |                |
+
+
+### `TRANSACTION`
+
+| Field        | Type                  | Null | Key | Default | Extra          |
+|--------------|-----------------------|------|-----|---------|----------------|
+| TransID      | int(11)               | NO   | PRI | NULL    | auto_increment |
+| Payment_amt  | int(11)               | NO   |     | NULL    |                |
+| Payment_type | enum('PESO','POINTS') | NO   |     | NULL    |                |
+| TransDesc    | varchar(255)          | NO   |     | NULL    |                |
+| DateCreated  | datetime              | NO   |     | NULL    |                |
+| DateUpdated  | datetime              | NO   |     | NULL    |                |
+| CustomerId   | int(11)               | NO   | MUL | NULL    |                |
+| BranchId     | int(11)               | NO   | MUL | NULL    |                |
+
+
 ## Developers
 * Evangelista, Erlen Mae S.
 * Magnaye, Aaron V.
