@@ -9,7 +9,7 @@
 1. Install [NodeJS](https://nodejs.org/en/download/) and MariaDB.
 2. Install latest version of [Yarn](https://yarnpkg.com/en/docs/install#alternatives-tab) or with `npm install yarn -g`.
 3. Install dependencies with `yarn install`.
-4. Load database schema `yarn run seed`.
+4. Load database schema `yarn seed`.
 
 ## Start
 1. Start the server with `yarn start`.
