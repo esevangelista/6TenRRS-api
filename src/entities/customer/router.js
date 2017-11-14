@@ -1,7 +1,5 @@
 import { Router } from 'express';
 import * as Ctrl from './controller';
-import * as RewardUtil from './../reward/controller';
-import * as PromoStarUtil from './../promostar/controller';
 
 const router = Router();
 
