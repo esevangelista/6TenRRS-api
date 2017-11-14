@@ -32,6 +32,36 @@ export const getPromoStarOfC = ({ Cid }) => {
   });
 }
 
+export const getValidPromoStarOfC = ({ Cid }) => {
+  return new Promise((resolve, reject) => {
+    const query= `SELECT * FROM PROMOSTAR WHERE CustomerId = ? && DateUsed IS NULL && ExprDate != ? `;
+    const values = [ Cid , new Date() ]; 
+    db.query(query,values,(err, rows) => {
+      if (err) {
+        return reject(500);
+      }else if (!rows.length) {
+        return reject(404);
+      }
+      return resolve(rows);
+    });
+  });
+}
+
+export const getUsedPromoStarOfC = ({ Cid }) => {
+  return new Promise((resolve, reject) => {
+    const query= `SELECT * FROM PROMOSTAR WHERE CustomerId = ? && DateUsed IS NOT NULL `;
+    const values = [ Cid ]; 
+    db.query(query,values,(err, rows) => {
+      if (err) {
+        return reject(500);
+      }else if (!rows.length) {
+        return reject(404);
+      }
+      return resolve(rows);
+    });
+  });
+}
+
 export const getAllPromoStar = () => {
   return new Promise((resolve, reject) => {
     const query = `SELECT * FROM PROMOSTAR`;

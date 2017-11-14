@@ -116,7 +116,7 @@ router.post('/reward/:id', async (req, res) => {
 });
 
 //update reward
-router.put('/customer/:Cid/:Rid', async (req, res) => {
+router.put('/reward/:Cid/:Rid', async (req, res) => {
   try {
     await Ctrl.updateReward(req.params, req.body);
     const reward = await Ctrl.getCustomer(req.params);

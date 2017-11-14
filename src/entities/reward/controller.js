@@ -91,3 +91,32 @@ export const updateReward = ({ Cid, Rid }, { Points, DateUsed, DateEarned }) => 
   });
 }
 
+export const getEarnedPtsOfCinYear = ({ Cid , Year}) => {
+  return new Promise((resolve, reject) => {
+    const query= `SELECT * FROM REWARD WHERE CustomerId = ? && Year(DateEarned) = ?`;
+    const values = [Cid, Year];
+    db.query(query,values,(err, rows) => {
+      if (err) {
+        return reject(500);
+      }else if (!rows.length) {
+        return reject(404);
+      }
+      return resolve(rows);
+    });
+  });
+}
+
+export const getUsedPtsOfCinYear = ({ Cid , Year}) => {
+  return new Promise((resolve, reject) => {
+    const query= `SELECT * FROM REWARD WHERE CustomerId = ? && Year(DateUsed) = ?`;
+    const values = [Cid, Year];
+    db.query(query,values,(err, rows) => {
+      if (err) {
+        return reject(500);
+      }else if (!rows.length) {
+        return reject(404);
+      }
+      return resolve(rows);
+    });
+  });
+}
