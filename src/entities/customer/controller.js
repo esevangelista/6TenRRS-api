@@ -2,17 +2,14 @@ import db from './../../database/index';
 import moment from 'moment';
 
 
-export const getCustomer = ({id}) => {
+export const getCustomer = ({Name}) => {
   return new Promise((resolve, reject) => {
-    const query= `SELECT * FROM CUSTOMER where CustomerID = ?`;
-    const values = [id];
+    const query= `SELECT * FROM CUSTOMER where Name LIKE ?`;
+    const values = [`%${Name}%`];
     db.query(query,values,(err, rows) => {
-      if (err) {
-        return reject(500);
-      }else if (!rows.length) {
-        return reject(404);
-      }
-      return resolve(rows[0]);
+      if (err) return reject(500);
+      else if (!rows.length) return reject(404);
+      return resolve(rows);
     });
   });
 }
@@ -52,9 +49,7 @@ export const addCustomer = ({ Name, Address, ContactNum, Birthday}) => {
     const values = [ Name, Address, ContactNum, Birthday, Age];
 
     db.query(query, values, (err, results) => {
-      if (err) {
-        return reject(500);
-      }
+      if (err)  return reject(500);
       return resolve(results.insertId);
     });
   });
@@ -69,12 +64,8 @@ export const updateCustomer = ({ id }, { Name, Address, ContactNum, Birthday }) 
     const Age = moment().diff(Birthday,'years',false);
     const values = [ Name, Address, ContactNum, Birthday, Age, id];
     db.query(query, values, (err, results) => {
-      if (!results.affectedRows) {
-        return reject(404);
-      }else if (err) {
-        return reject(500);
-      }
-
+      if (!results.affectedRows) return reject(404);
+      else if (err)  return reject(500);
       return resolve();
     });
   });

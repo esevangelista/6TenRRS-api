@@ -25,7 +25,7 @@ router.get('/customer/', async (req, res) => {
   }
 });
 
-router.get('/customer/:id', async (req, res) => {
+router.get('/customer/:Name', async (req, res) => {
   try {
     const user = await Ctrl.getCustomer(req.params);
     res.status(200).json({
@@ -110,8 +110,6 @@ router.put('/customer/:id', async (req, res) => {
     res.status(status).json({ status, message });
   }
 });
-
-
 
 
 export default router;
