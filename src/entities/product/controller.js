@@ -16,10 +16,24 @@ export const getProduct = ({id}) => {
   });   
 }
 
+export const getProductName = ({ProdName}) => {
+  return new Promise((resolve, reject) => {
+    const query= `SELECT * FROM PRODUCT where ProdName LIKE ?`;
+    const values = [`%${ProdName}%`];
+    db.query(query,values,(err, rows) => {
+      if (err) {
+        return reject(500);
+      }else if (!rows.length) {
+        return reject(404);
+      }
+      return resolve(rows);
+    });
+  });   
+}
 
 export const getAllProduct = () => {
   return new Promise((resolve, reject) => {
-    const query = `SELECT * FROM PRODUCT`;
+    const query = `SELECT * FROM PRODUCT `;
     const values = [];
     db.query(query, values, (err, rows) => {
       if (err) {
@@ -44,10 +58,10 @@ export const deleteProduct = ({ id }) => {
   });
 };
 
-export const addProduct = ({ ProdName, ProdPoints, Price}) => {
+export const addProduct = ({ ProdName, Price}) => {
   return new Promise((resolve, reject) => {
-    const query = `INSERT INTO PRODUCT VALUES (DEFAULT, ?, ?, ?)`;
-    const values = [ ProdName, ProdPoints, Price];
+    const query = `INSERT INTO PRODUCT VALUES (DEFAULT, ?, ?)`;
+    const values = [ ProdName, Price];
 
     db.query(query, values, (err, results) => {
       if (err) {
@@ -58,13 +72,13 @@ export const addProduct = ({ ProdName, ProdPoints, Price}) => {
   });
 };
 
-export const updateProduct = ({ id }, { ProdName, ProdPoints, Price}) => {
+export const updateProduct = ({ id }, { ProdName, Price}) => {
   return new Promise((resolve, reject) => {
     const query = 
       `UPDATE PRODUCT SET 
-      ProdName = ?, ProdPoints = ? , Price = ?
+      ProdName = ?,Price = ?
       WHERE ProdID = ?`;
-    const values = [ ProdName, ProdPoints, Price, id];
+    const values = [ ProdName,Price, id];
     db.query(query, values, (err, results) => {
       if (!results.affectedRows) {
         return reject(404);

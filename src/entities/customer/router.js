@@ -25,7 +25,29 @@ router.get('/customer/', async (req, res) => {
   }
 });
 
-router.get('/customer/:Name', async (req, res) => {
+router.get('/customerName/:Name', async (req, res) => {
+  try {
+    const user = await Ctrl.getCustomerName(req.params);
+    res.status(200).json({
+      status: 200,
+      message: 'Successfully fetched user',
+      data: user
+    });
+  } catch (status) {
+    let message = '';
+    switch (status) {
+      case 404:
+        message = 'User not found';
+        break;
+      case 500:
+        message = 'Internal server error';
+        break;
+    }
+    res.status(status).json({ status, message });
+  }
+});
+
+router.get('/customer/:id', async (req, res) => {
   try {
     const user = await Ctrl.getCustomer(req.params);
     res.status(200).json({

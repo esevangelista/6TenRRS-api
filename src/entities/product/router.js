@@ -46,7 +46,27 @@ router.get('/product/:id', async (req, res) => {
     res.status(status).json({ status, message });
   }
 });
-
+router.get('/productName/:ProdName', async (req, res) => {
+  try {
+    const products = await Ctrl.getProductName(req.params);
+    res.status(200).json({
+      status: 200,
+      message: 'Successfully fetched products',
+      data: products
+    });
+  } catch (status) {
+    let message = '';
+    switch (status) {
+      case 404:
+        message = 'Product not found';
+        break;
+      case 500:
+        message = 'Internal server error';
+        break;
+    }
+    res.status(status).json({ status, message });
+  }
+});
 router.delete('/product/:id', async (req, res) => {
   try {
     await Ctrl.deleteProduct(req.params);
