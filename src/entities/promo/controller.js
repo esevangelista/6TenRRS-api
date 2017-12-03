@@ -33,10 +33,11 @@ export const getPromoOfP = ({ Pid, id}) => {
 
 export const getAllPromo = () => {
   return new Promise((resolve, reject) => {
-    const query = `SELECT * FROM PROMO`;
+    const query = `SELECT * FROM PROMO p left join PRODUCT pr on p.ProductID = pr.ProdID`;
     const values = [];
     db.query(query, values, (err, rows) => {
       if (err) {
+        console.log(err)
         return reject(500);
       }else if (!rows.length) {
         return reject(404);
@@ -46,10 +47,25 @@ export const getAllPromo = () => {
   });
 };
 
-export const getAllPromoOfP = ({ Pid }) => {
+// export const getAllPromoOfP = ({ Pid }) => {
+//   return new Promise((resolve, reject) => {
+//     const query= `SELECT * FROM PROMO where ProductID= ?`;
+//     const values = [Pid];
+//     db.query(query,values,(err, rows) => {
+//       if (err) {
+//         return reject(500);
+//       }else if (!rows.length) {
+//         return reject(404);
+//       }
+//       return resolve(rows);
+//     });
+//   });   
+// }
+
+export const getAllPromoOfP = ({ Name }) => {
   return new Promise((resolve, reject) => {
-    const query= `SELECT * FROM PROMO where ProductID= ?`;
-    const values = [Pid];
+    const query = `SELECT * FROM PROMO p left join PRODUCT pr on p.ProductID = pr.ProdID where pr.ProdName LIKE ?`;
+    const values = [`%${Name}%`];
     db.query(query,values,(err, rows) => {
       if (err) {
         return reject(500);

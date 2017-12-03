@@ -50,7 +50,7 @@ router.get('/promo/:Pid/:id', async (req, res) => {
 });
 
 
-router.get('/promo/:Pid', async (req, res) => {
+router.get('/promo/:Name', async (req, res) => {
   try {
     const promos = await Ctrl.getAllPromoOfP(req.params);
     res.status(200).json({
