@@ -25,27 +25,27 @@ router.get('/branch/', async (req, res) => {
   }
 });
 
-router.get('/branchSearch/:search', async (req, res) => {
-    try {
-      const branch = await Ctrl.getBranchByLocMgr(req.params);
-      res.status(200).json({
-        status: 200,
-        message: 'Successfully fetched branch',
-        data: branch
-      })
-    } catch(status){
-      let message = '';
-      switch (status) {
-        case 404:
-          message = 'Branch not found';
-          break;
-        case 500:
-          message = 'Internal server error';
-          break;
-      }
-      res.status(status).json({status, message});
+router.get('/branch/:Name', async (req, res) => {
+  try {
+    const user = await Ctrl.getBranchName(req.params);
+    res.status(200).json({
+      status: 200,
+      message: 'Successfully fetched branch',
+      data: branch
+    })
+  } catch(status){
+    let message = '';
+    switch (status) {
+      case 404:
+        message = 'USer not found';
+        break;
+      case 500:
+        message = 'Internal server error';
+        break;
     }
-  });
+    res.status(status).json({status, message});
+  }
+});
 
 router.get('/branch/:id', async (req, res) => {
   try {

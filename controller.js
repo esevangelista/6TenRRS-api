@@ -1,6 +1,17 @@
 import db from './../../database/index';
 
 
+export const getBranchName = ({name}) => {
+  return new Promise((resolve ,reject) => {
+    const query = `SELECT * FROM BRANCH where name LIKE ?`;
+    const values = [`%${Name}%`];
+    db.query(query, values,(err, rows) => {
+      if (err) return reject(500);
+      else if (!rows.length) return reject(404);
+      return resolve(rows);
+    });
+  });
+}
 
 export const getBranch = ({id}) => {
   return new Promise((resolve, reject) => {
@@ -17,17 +28,6 @@ export const getBranch = ({id}) => {
   });
 }
 
-export const getBranchByLocMgr = ({search}) => {
-    return new Promise((resolve ,reject) => {
-      const query = `SELECT * FROM BRANCH where BranchLocation LIKE ? or BranchManager LIKE ?`;
-      const values = [`%${search}%`,`%${search}%`];
-      db.query(query, values,(err, rows) => {
-        if (err) return reject(500);
-        else if (!rows.length) return reject(404);
-        return resolve(rows);
-      });
-    });
-  }
 
 export const getAllBranch = () => {
   return new Promise((resolve, reject) => {
