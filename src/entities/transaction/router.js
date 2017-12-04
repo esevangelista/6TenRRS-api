@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import * as Ctrl from './controller';
-
+import * as PromoUtil from './../promo/controller'
 const router = Router();
 
 
@@ -142,6 +142,8 @@ router.delete('/transaction/:id', async (req, res) => {
 
 router.post('/transaction/:Bid', async (req, res) => {
   try {
+
+
     const id = await Ctrl.addTransaction(req.params,req.body);
     const transaction= await Ctrl.getTransaction({ id });
     res.status(200).json({

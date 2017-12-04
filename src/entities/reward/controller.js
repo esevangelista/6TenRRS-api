@@ -1,9 +1,9 @@
 import db from './../../database/index';
-
-export const getReward = ({ Cid, Rid}) => {
+import moment from 'moment';
+export const getReward = ({ id}) => {
   return new Promise((resolve, reject) => {
-    const query= `SELECT * FROM REWARD where RewardID = ? && CustomerId = ?`;
-    const values = [Rid, Cid]
+    const query= `SELECT * FROM REWARD where RewardID = ? `;
+    const values = [id]
     db.query(query,values,(err, rows) => {
       if (err) {
         return reject(500);
@@ -17,7 +17,7 @@ export const getReward = ({ Cid, Rid}) => {
 
 export const getRewardOfC = ({ Cid }) => {
   return new Promise((resolve, reject) => {
-    const query= `SELECT * FROM REWARD WHERE CustomerId = ?`;
+    const query= `SELECT * FROM REWARD r left join CUSTOMER c on r.CustomerId = c.CustomerID where c.CustomerID = ?`;
     const values = [Cid];
     db.query(query,values,(err, rows) => {
       if (err) {
@@ -33,7 +33,7 @@ export const getRewardOfC = ({ Cid }) => {
 
 export const getAllReward = () => {
   return new Promise((resolve, reject) => {
-    const query = `SELECT * FROM REWARD`;
+    const query = `SELECT * FROM REWARD r left join CUSTOMER c on  r.CustomerId=c.CustomerID`;
     const values = [];
     db.query(query, values, (err, rows) => {
       if (err) {
@@ -45,7 +45,20 @@ export const getAllReward = () => {
     });
   });
 };
-
+export const getAllRewardRev = () => {
+  return new Promise((resolve, reject) => {
+    const query = `Select Name, SUM(Points) "Points" from reward left join customer on reward.CustomerId=customer.CustomerID where DateUsed IS NULL group by Name `;
+    const values = [];
+    db.query(query, values, (err, rows) => {
+      if (err) {
+        return reject(500);
+      }else if (!rows.length) {
+        return reject(404);
+      }
+      return resolve(rows);
+    });
+  });
+};
 export const deleteReward = ({ id }) => {
   return new Promise((resolve, reject) => {
     const query = `DELETE FROM REWARD where RewardID = ?`;
@@ -59,10 +72,10 @@ export const deleteReward = ({ id }) => {
 };
 
 
-export const addReward = ({id},{Points, DateEarned}) => {
+export const addReward = ({id},{Points}) => {
   return new Promise((resolve, reject) => {
     const query = `INSERT INTO REWARD VALUES (DEFAULT, ?, ?, ?, ?)`;
-    const values = [ Points, null, DateEarned, id];
+    const values = [ Points, null, new Date(), id];
     db.query(query, values, (err, results) => {
       if (err) {
         return reject(500);

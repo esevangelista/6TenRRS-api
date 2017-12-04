@@ -122,3 +122,4 @@ export const updateTransaction = ({ id }, { Payment_amt, Payment_type, TransDesc
     });
   });
 }
+

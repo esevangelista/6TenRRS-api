@@ -25,6 +25,28 @@ router.get('/reward/', async (req, res) => {
     res.status(status).json({ status, message });
   }
 });
+
+router.get('/rewardReview/', async (req, res) => {
+  try {
+    const rewards = await Ctrl.getAllRewardRev();
+    res.status(200).json({
+      status: 200,
+      message: 'Successfully fetched rewards',
+      data: rewards
+    });
+  } catch (status) {
+    let message = '';
+    switch (status) {
+        case 404:
+          message = 'Rewards not found';
+          break;
+      case 500:
+        message = 'Internal server error';
+        break;
+    }
+    res.status(status).json({ status, message });
+  }
+});
 // all rewards belonging to CustomerId
 router.get('/reward/:Cid', async (req, res) => {
   try {

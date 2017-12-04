@@ -95,13 +95,13 @@ router.delete('/promostar/:Cid/:PSid', async (req, res) => {
 
 router.post('/promostar/:Cid/', async (req, res) => {
   try {
-    const id = await Ctrl.addPromoStar(req.params,req.body);
-    req.params.PSid = id;
-    const stock = await Ctrl.getPromoStar(req.params);
+    const arr = req.body;
+    for(var i=0;i<arr.length;i++){
+      await Ctrl.addPromoStar(req.params,arr[i]);
+    }
     res.status(200).json({
       status: 200,
-      message: 'Successfully added promo star',
-      data: stock
+      message: 'Successfully added promo star/s'
     });
   } catch (status) {
     let message = '';

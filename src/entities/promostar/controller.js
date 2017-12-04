@@ -91,10 +91,10 @@ export const deletePromoStar = ({ Cid, PSid }) => {
 };
 
 
-export const addPromoStar = ({ Cid} ,{ Starsval, DateEarned, ExprDate, PromoId }) => {
+export const addPromoStar = ({ Cid} ,{ Starsval, ExprDate, PromoId }) => {
   return new Promise((resolve, reject) => {
     const query = `INSERT INTO PROMOSTAR VALUES (DEFAULT, ?, ?, ?, ?, ?, ?)`;
-    const values = [ Starsval, null, DateEarned, ExprDate, Cid, PromoId];
+    const values = [ Starsval, null, new Date(), ExprDate, Cid, PromoId];
     db.query(query, values, (err, results) => {
       if (err) {
         console.log(err);

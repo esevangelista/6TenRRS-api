@@ -47,6 +47,7 @@ export const getAllPromo = () => {
   });
 };
 
+
 // export const getAllPromoOfP = ({ Pid }) => {
 //   return new Promise((resolve, reject) => {
 //     const query= `SELECT * FROM PROMO where ProductID= ?`;
