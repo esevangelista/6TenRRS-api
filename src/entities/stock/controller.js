@@ -19,7 +19,7 @@ export const getStock = ({ Bid, Sid }) => {
 
 export const getStockOfB = ({ Bid }) => {
   return new Promise((resolve, reject) => {
-    const query= `SELECT * FROM STOCK WHERE Branch_id = ?`;
+    const query= `select * from stock s left join product p on s.Product_Id=p.ProdID left join branch b on s.Branch_Id=b.BranchID where s.Branch_Id = ?`;
     const values = [Bid];
     db.query(query,values,(err, rows) => {
       if (err) {
@@ -32,9 +32,10 @@ export const getStockOfB = ({ Bid }) => {
   });
 }
 
+
 export const getAllStock = () => {
   return new Promise((resolve, reject) => {
-    const query = `SELECT * FROM STOCK`;
+    const query = ` select * from stock s left join product p on s.Product_Id=p.ProdID left join branch b on s.Branch_Id=b.BranchID`;
     const values = [];
     db.query(query, values, (err, rows) => {
       if (err) {

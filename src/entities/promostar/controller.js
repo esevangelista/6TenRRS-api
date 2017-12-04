@@ -34,7 +34,7 @@ export const getPromoStarOfC = ({ Cid }) => {
 
 export const getValidPromoStarOfC = ({ Cid }) => {
   return new Promise((resolve, reject) => {
-    const query= `SELECT * FROM PROMOSTAR WHERE CustomerId = ? && DateUsed IS NULL && ExprDate != ? `;
+    const query= `SELECT * FROM PROMOSTAR p left join Customer c on p.CustomerId=c.CustomerID WHERE p.CustomerId = ? && p.DateUsed IS NULL && p.ExprDate != ? `;
     const values = [ Cid , new Date() ]; 
     db.query(query,values,(err, rows) => {
       if (err) {
@@ -49,7 +49,7 @@ export const getValidPromoStarOfC = ({ Cid }) => {
 
 export const getUsedPromoStarOfC = ({ Cid }) => {
   return new Promise((resolve, reject) => {
-    const query= `SELECT * FROM PROMOSTAR WHERE CustomerId = ? && DateUsed IS NOT NULL `;
+    const query= `SELECT * FROM PROMOSTAR p left join Customer c on p.CustomerId=c.CustomerID WHERE p.CustomerId = ? && p.DateUsed IS NOT NULL `;
     const values = [ Cid ]; 
     db.query(query,values,(err, rows) => {
       if (err) {

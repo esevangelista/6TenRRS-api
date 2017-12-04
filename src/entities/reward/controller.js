@@ -104,12 +104,13 @@ export const updateReward = ({ Cid, Rid }, { Points, DateUsed, DateEarned }) => 
   });
 }
 
-export const getEarnedPtsOfCinYear = ({ Cid , Year}) => {
+export const getEarnedPtsOfCinYear = ({ Cid, Year}) => {
   return new Promise((resolve, reject) => {
-    const query= `SELECT * FROM REWARD WHERE CustomerId = ? && Year(DateEarned) = ?`;
+    const query= `SELECT * FROM REWARD r left join Customer c on c.CustomerID=r.CustomerId WHERE r.CustomerId = ? && Year(r.DateEarned) = ?`;
     const values = [Cid, Year];
     db.query(query,values,(err, rows) => {
       if (err) {
+        console.log(err)
         return reject(500);
       }else if (!rows.length) {
         return reject(404);
@@ -121,7 +122,7 @@ export const getEarnedPtsOfCinYear = ({ Cid , Year}) => {
 
 export const getUsedPtsOfCinYear = ({ Cid , Year}) => {
   return new Promise((resolve, reject) => {
-    const query= `SELECT * FROM REWARD WHERE CustomerId = ? && Year(DateUsed) = ?`;
+    const query= `SELECT * FROM REWARD r left join Customer c on c.CustomerID=r.CustomerId WHERE r.CustomerId = ? && Year(r.DateUsed) = ?`;
     const values = [Cid, Year];
     db.query(query,values,(err, rows) => {
       if (err) {

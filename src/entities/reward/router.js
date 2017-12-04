@@ -70,6 +70,49 @@ router.get('/reward/:Cid', async (req, res) => {
   }
 });
 
+router.get('/rewardInYr/:Cid/:Year', async (req, res) => {
+  try {
+    const rewards = await Ctrl.getEarnedPtsOfCinYear(req.params);
+    res.status(200).json({
+      status: 200,
+      message: 'Successfully fetched rewards ',
+      data: rewards
+    });
+  } catch (status) {
+    let message = '';
+    switch (status) {
+      case 404:
+        message = 'Rewards not found';
+        break;
+      case 500:
+        message = 'Internal server error';
+        break;
+    }
+    res.status(status).json({ status, message });
+  }
+});
+
+router.get('/rewardUsedInYr/:Cid/:Year', async (req, res) => {
+  try {
+    const rewards = await Ctrl.getUsedPtsOfCinYear(req.params);
+    res.status(200).json({
+      status: 200,
+      message: 'Successfully fetched rewards ',
+      data: rewards
+    });
+  } catch (status) {
+    let message = '';
+    switch (status) {
+      case 404:
+        message = 'Rewards not found';
+        break;
+      case 500:
+        message = 'Internal server error';
+        break;
+    }
+    res.status(status).json({ status, message });
+  }
+});
 // get reward specified by the CustomerId and RewardID
 router.get('/reward/:Cid/:Rid', async (req, res) => {
 

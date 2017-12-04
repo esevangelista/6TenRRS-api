@@ -48,7 +48,49 @@ router.get('/promostar/:Cid', async (req, res) => {
   }
 });
 
+router.get('/promostarValid/:Cid', async (req, res) => {
+  try {
+    const promoStars = await Ctrl.getValidPromoStarOfC(req.params);
+    res.status(200).json({
+      status: 200,
+      message: 'Successfully fetched promo stars of customer',
+      data: promoStars
+    });
+  } catch (status) {
+    let message = '';
+    switch (status) {
+      case 404:
+        message = 'Promo stars of customer not found';
+        break;
+      case 500:
+        message = 'Internal server error';
+        break;
+    }
+    res.status(status).json({ status, message });
+  }
+});
 
+router.get('/promostarUsed/:Cid', async (req, res) => {
+  try {
+    const promoStars = await Ctrl.getUsedPromoStarOfC(req.params);
+    res.status(200).json({
+      status: 200,
+      message: 'Successfully fetched promo stars of customer',
+      data: promoStars
+    });
+  } catch (status) {
+    let message = '';
+    switch (status) {
+      case 404:
+        message = 'Promo stars of customer not found';
+        break;
+      case 500:
+        message = 'Internal server error';
+        break;
+    }
+    res.status(status).json({ status, message });
+  }
+});
 router.get('/promostar/:Cid/:PSid', async (req, res) => {
 
   try {
