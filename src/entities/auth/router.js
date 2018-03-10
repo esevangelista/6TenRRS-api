@@ -1,10 +1,13 @@
 import { Router } from 'express';
 import * as Ctrl from './controller';
+
 const router = Router();
+
 router.post('/login', async (req, res) => {
   try {
     const user = await Ctrl.login(req.body);
     req.session.user = user;
+
     res.status(200).json({
       status: 200,
       message: 'Successfully logged in',
@@ -25,7 +28,7 @@ router.post('/login', async (req, res) => {
 });
 
 router.post('/logout', async (req, res) => {
-  req.session.user=null;
+  req.session.destroy();
   res.status(200).json({
     status: 200,
     message: 'Successfully logged out'
